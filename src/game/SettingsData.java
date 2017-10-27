@@ -7,26 +7,18 @@ package game;
 
 import java.io.*;
 
-public class SettingsData implements Serializable {
-    private int whichDrawMode = 1; //1
-    private int whichColor = 1;//1
-    private int whichGameMode = 1;//1
-    private int whichWasLast = 1;//1
-    private int population = 2500;//2500
-    private int delay = 5000;//5000
+class SettingsData implements Serializable {
+    private static long serialVersionUID = -1;
+    private int whichDrawMode = 1;
+    private int whichColor = 1;
+    private int whichGameMode = 1;
+    private int whichWasLast = 1;
+    private int population = 2500;
+    private int delay = 5000;
+    private int shape = 1;
     private boolean crazyRainbow = false;
 
-    public SettingsData(int whichDrawMode, int whichColor, int whichGameMode, int whichWasLast, int population, int delay, boolean crazyRainbow){
-        this.whichDrawMode = whichDrawMode;
-        this.whichColor = whichColor;
-        this.whichGameMode = whichGameMode;
-        this.whichWasLast = whichWasLast;
-        this.population = population;
-        this.delay = delay;
-        this.crazyRainbow = crazyRainbow;
-    }
-
-    public SettingsData() {}
+    SettingsData() {}
 
     boolean isCrazyRainbow() {
         return crazyRainbow;
@@ -106,6 +98,14 @@ public class SettingsData implements Serializable {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public int getShape() {
+        return shape;
+    }
+
+    public void setShape(int shape) {
+        this.shape = shape;
     }
 }
 

@@ -6,6 +6,8 @@
 package game;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 
 public class Settings extends JPanel implements Serializable {
@@ -25,22 +27,27 @@ public class Settings extends JPanel implements Serializable {
     JPanel colorPanel;
     JPanel popPanel;
     JPanel delayPanel;
-
-    private JButton backButton;
     JPanel settingsPanel;
     JPanel modesPanel;
+    JPanel shapePanel;
+
+    private JButton backButton;
     private JRadioButton normalRadioButton;
     private JRadioButton drawRadioButton;
     private JSlider popSlider;
     private JSlider delaySlider;
+    private JRadioButton circleRadioButton;
+    private JRadioButton squareRadioButton;
 
     static int whichDrawMode = 1;
     static int whichColor = 1;
     static int whichGameMode = 1;
     static int population = 2500;
     static int delay = 5000;
+    static int whichShape = 1;
     static boolean crazyRainbow = false;
     private int whichWasLast = 1;
+
     private SettingsData data = new SettingsData();
 
     Settings(JPanel mainPanel) {
@@ -104,6 +111,15 @@ public class Settings extends JPanel implements Serializable {
                 break;
             case 2:
                 drawRadioButton.setSelected(true);
+                break;
+        }
+
+        switch (whichShape) {
+            case 1:
+                circleRadioButton.setSelected(true);
+                break;
+            case 2:
+                squareRadioButton.setSelected(true);
                 break;
         }
 
@@ -177,6 +193,7 @@ public class Settings extends JPanel implements Serializable {
             data.setWhichGameMode(whichGameMode);
             data.setWhichWasLast(whichWasLast);
             data.setPopulation(population);
+            data.setShape(whichShape);
             data.setDelay(delay);
             data.setCrazyRainbow(crazyRainbow);
             data.writeSettings(data);
@@ -203,5 +220,9 @@ public class Settings extends JPanel implements Serializable {
         normalRadioButton.addActionListener(e -> whichGameMode = 1);
 
         drawRadioButton.addActionListener(e -> whichGameMode = 2);
+
+        circleRadioButton.addActionListener(e -> whichShape = 1);
+
+        squareRadioButton.addActionListener(e -> whichShape = 2);
     }
 }

@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="game.Settings">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="760" height="686"/>
+      <xy x="20" y="20" width="760" height="698"/>
     </constraints>
     <properties>
       <background color="-13553359"/>
@@ -39,6 +39,7 @@
               <foreground color="-1"/>
             </properties>
             <border type="line" title="Delay" title-position="1">
+              <font name="Arial" size="16"/>
               <title-color color="-1"/>
               <color color="-13553359"/>
             </border>
@@ -60,9 +61,10 @@
                 </constraints>
                 <properties>
                   <background color="-13553359"/>
-                  <foreground color="-12237499"/>
+                  <foreground color="-1"/>
                   <majorTickSpacing value="1000"/>
                   <maximum value="10000"/>
+                  <minimum value="1000"/>
                   <minorTickSpacing value="100"/>
                   <paintLabels value="true"/>
                   <paintTicks value="true"/>
@@ -81,9 +83,10 @@
             <properties>
               <background color="-12237499"/>
               <font name="Arial" size="16"/>
-              <foreground color="-12237499"/>
+              <foreground color="-1"/>
             </properties>
             <border type="line" title="Population" title-position="1">
+              <font name="Arial" size="16"/>
               <title-color color="-1"/>
               <color color="-13553359"/>
             </border>
@@ -105,11 +108,11 @@
                 </constraints>
                 <properties>
                   <background color="-13553359"/>
-                  <foreground color="-12237499"/>
+                  <foreground color="-1"/>
                   <inverted value="false"/>
                   <majorTickSpacing value="1000"/>
                   <maximum value="10000"/>
-                  <minimum value="500"/>
+                  <minimum value="1000"/>
                   <minorTickSpacing value="100"/>
                   <paintLabels value="true"/>
                   <paintTicks value="true"/>
@@ -125,16 +128,16 @@
             <margin top="10" left="10" bottom="10" right="10"/>
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="200" height="-1"/>
+                <preferred-size width="250" height="-1"/>
               </grid>
             </constraints>
             <properties>
-              <background color="-12237499"/>
+              <background color="-13553359"/>
               <font name="Arial" size="16"/>
               <foreground color="-1"/>
             </properties>
             <border type="line" title="Style" title-position="1">
-              <font/>
+              <font name="Arial" size="16"/>
               <title-color color="-1"/>
               <color color="-13553359"/>
             </border>
@@ -143,21 +146,21 @@
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false">
                     <minimum-size width="150" height="30"/>
-                    <preferred-size width="150" height="30"/>
+                    <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
                 <properties>
                   <background color="-12237499"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
-                  <text value="Ghosts"/>
+                  <text value="Ghost cells"/>
                 </properties>
               </component>
               <component id="fbbb6" class="javax.swing.JRadioButton" binding="coloredDotsRadioButton">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false">
                     <minimum-size width="150" height="30"/>
-                    <preferred-size width="150" height="30"/>
+                    <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
                 <properties>
@@ -165,35 +168,35 @@
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <horizontalAlignment value="2"/>
-                  <text value="Colored dots"/>
+                  <text value="Colored cells"/>
                 </properties>
               </component>
               <component id="82d29" class="javax.swing.JRadioButton" binding="crazyRainbowDotsRadioButton" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false">
                     <minimum-size width="150" height="30"/>
-                    <preferred-size width="150" height="30"/>
+                    <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
                 <properties>
                   <background color="-12237499"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
-                  <text value="Crazy Rainbow dots"/>
+                  <text value="Crazy Rainbow cells"/>
                 </properties>
               </component>
               <component id="9846b" class="javax.swing.JRadioButton" binding="rainbowDotsRadioButton">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false">
                     <minimum-size width="150" height="30"/>
-                    <preferred-size width="150" height="30"/>
+                    <preferred-size width="200" height="30"/>
                   </grid>
                 </constraints>
                 <properties>
                   <background color="-12237499"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
-                  <text value="Rainbow dots"/>
+                  <text value="Rainbow cells"/>
                 </properties>
               </component>
             </children>
@@ -202,15 +205,15 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="200" height="-1"/>
+                <preferred-size width="250" height="-1"/>
               </grid>
             </constraints>
             <properties>
-              <background color="-12237499"/>
+              <background color="-13553359"/>
               <font name="Arial" size="16"/>
             </properties>
             <border type="line" title="Colors" title-position="1">
-              <font/>
+              <font name="Arial" size="16"/>
               <title-color color="-1"/>
               <color color="-13553359"/>
             </border>
@@ -301,10 +304,11 @@
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-12237499"/>
+              <background color="-13553359"/>
               <font name="Arial" size="16"/>
             </properties>
             <border type="line" title="Modes" title-position="1">
+              <font name="Arial" size="16"/>
               <title-color color="-1"/>
               <color color="-13553359"/>
             </border>
@@ -403,6 +407,49 @@
               </grid>
             </constraints>
           </vspacer>
+          <grid id="ef1c4" binding="shapePanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-13553359"/>
+              <foreground color="-1"/>
+            </properties>
+            <border type="line" title="Shape">
+              <font name="Arial" size="16"/>
+              <title-color color="-1"/>
+              <color color="-13553359"/>
+            </border>
+            <children>
+              <component id="5201b" class="javax.swing.JRadioButton" binding="circleRadioButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="30"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-12237499"/>
+                  <font name="Arial" size="16"/>
+                  <foreground color="-1"/>
+                  <text value="Circle"/>
+                </properties>
+              </component>
+              <component id="2246c" class="javax.swing.JRadioButton" binding="squareRadioButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="30"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-12237499"/>
+                  <font name="Arial" size="16"/>
+                  <foreground color="-1"/>
+                  <text value="Square"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>
@@ -432,6 +479,11 @@
       <member id="d784b"/>
       <member id="3ad22"/>
       <member id="70d3f"/>
+    </group>
+    <group name="Shape">
+      <member id="5201b"/>
+      <member id="5201b"/>
+      <member id="2246c"/>
     </group>
   </buttonGroups>
 </form>

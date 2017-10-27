@@ -16,8 +16,8 @@ public class MainForm {
     private JButton EXITButton;
     private JButton STARTGAMEButton;
 
-    private JPanel buttonsPanel;
-    private JLabel pictureLabel;
+    JPanel buttonsPanel;
+    JLabel pictureLabel;
 
     MainForm() {
         URL iconURL = MainForm.class.getResource("GameIcon.png" /*"GhostIcon.png"*/);

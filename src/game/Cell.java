@@ -70,14 +70,21 @@ class Cell {
             randomColor = new Color(R, G, B);
         }
         g.setColor(randomColor);
-        g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+        if (Settings.whichShape == 1) {
+            g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+        } else if (Settings.whichShape == 2) {
+            g.fillRect(x + 1, y + 1, 8,8);
+        }
     }
 
     void DrawCell(int x, int y, Graphics g, Color c) {
         g.setColor(c);
-        g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+        if (Settings.whichShape == 1) {
+            g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+        } else if (Settings.whichShape == 2) {
+            g.fillRect(x + 1, y + 1, 8,8);
+        }
     }
-
     private void DrawCell(int x, int y, Graphics g, ImageIcon img) {
         g.drawImage(img.getImage(), x, y, null);
     }
