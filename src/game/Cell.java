@@ -219,11 +219,11 @@ class Cell {
         for (int i = 0; i < s; i++) {
             for (int j = 0; j < o; j++) {
                 if (Table.get(i).get(j).getStatus()) {
-                    if (Settings.whichMode == 1) {
+                    if (Settings.whichDrawMode == 1) {
                         Table.get(i).get(j).DrawCell(x, y, g);
-                    } else if (Settings.whichMode == 2) {
+                    } else if (Settings.whichDrawMode == 2) {
                         Table.get(i).get(j).DrawCell(x, y, g, Ghost);
-                    } else if (Settings.whichMode == 3) {
+                    } else if (Settings.whichDrawMode == 3) {
                         switch (Settings.whichColor) {
                             case 1:
                                 Table.get(i).get(j).DrawCell(x, y, g, Color.BLUE);

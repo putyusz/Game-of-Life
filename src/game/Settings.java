@@ -6,11 +6,7 @@
 package game;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.io.*;
-
-import static java.lang.Integer.parseInt;
 
 public class Settings extends JPanel implements Serializable {
 
@@ -31,20 +27,21 @@ public class Settings extends JPanel implements Serializable {
     JPanel delayPanel;
 
     private JButton backButton;
-    private JPanel settingsPanel;
-    private JPanel modesPanel;
+    JPanel settingsPanel;
+    JPanel modesPanel;
     private JRadioButton normalRadioButton;
     private JRadioButton drawRadioButton;
     private JSlider popSlider;
     private JSlider delaySlider;
 
-    static int whichMode = 1;
+    static int whichDrawMode = 1;
     static int whichColor = 1;
     static int whichGameMode = 1;
     static int population = 2500;
     static int delay = 5000;
     static boolean crazyRainbow = false;
     private int whichWasLast = 1;
+    private SettingsData data = new SettingsData();
 
     Settings(JPanel mainPanel) {
 
@@ -53,6 +50,19 @@ public class Settings extends JPanel implements Serializable {
         GREENRadioButton.setEnabled(false);
         YELLOWRadioButton.setEnabled(false);
         REDRadioButton.setEnabled(false);
+
+        data = data.readSettings();
+
+        whichDrawMode = data.getWhichDrawMode();
+        whichColor = data.getWhichColor();
+        whichGameMode = data.getWhichGameMode();
+        population = data.getPopulation();
+        delay = data.getDelay();
+        crazyRainbow = data.isCrazyRainbow();
+        whichWasLast = data.getWhichWasLast();
+
+        popSlider.setValue(population);
+        delaySlider.setValue(delay);
 
         switch (whichWasLast) {
             case 1:
@@ -98,7 +108,7 @@ public class Settings extends JPanel implements Serializable {
         }
 
         rainbowDotsRadioButton.addActionListener(e -> {
-            whichMode = 1;
+            whichDrawMode = 1;
             crazyRainbow = false;
             whichWasLast = 1;
             BLUERadioButton.setEnabled(false);
@@ -114,7 +124,7 @@ public class Settings extends JPanel implements Serializable {
         });
 
         ghostsRadioButton.addActionListener(e -> {
-            whichMode = 2;
+            whichDrawMode = 2;
             crazyRainbow = false;
             whichWasLast = 3;
             BLUERadioButton.setEnabled(false);
@@ -125,7 +135,7 @@ public class Settings extends JPanel implements Serializable {
         });
 
         coloredDotsRadioButton.addActionListener(e -> {
-            whichMode = 3;
+            whichDrawMode = 3;
             crazyRainbow = false;
             whichWasLast = 4;
             BLUERadioButton.setSelected(true);
@@ -162,6 +172,14 @@ public class Settings extends JPanel implements Serializable {
         });
 
         backButton.addActionListener(e -> {
+            data.setWhichColor(whichColor);
+            data.setWhichDrawMode(whichDrawMode);
+            data.setWhichGameMode(whichGameMode);
+            data.setWhichWasLast(whichWasLast);
+            data.setPopulation(population);
+            data.setDelay(delay);
+            data.setCrazyRainbow(crazyRainbow);
+            data.writeSettings(data);
             MainForm.mainFrame.getContentPane().removeAll();
             MainForm.mainFrame.getContentPane().repaint();
             MainForm.mainFrame.add(mainPanel);
