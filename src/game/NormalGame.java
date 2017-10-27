@@ -25,7 +25,7 @@ public class NormalGame extends JPanel implements ActionListener {
     private URL ghostURL = NormalGame.class.getResource("Ghost.jpg");
     private ImageIcon Ghost = new ImageIcon(ghostURL);
 
-    ArrayList<Integer> ints;
+    //ArrayList<Integer> ints;
 
     NormalGame(JPanel mainPanel) {
         JButton exitButton = new JButton("EXIT");

@@ -15,7 +15,6 @@ public class MainForm {
 
     private JButton SETTINGSButton;
     private JButton EXITButton;
-    private JButton GAMEMODESButton;
     private JButton STARTGAMEButton;
 
     private JPanel buttonsPanel;
@@ -39,20 +38,13 @@ public class MainForm {
             mainFrame.getContentPane().removeAll();
             mainFrame.getContentPane().repaint();
 
-            if (GameModes.whichGameMode == 1) {
+            if (Settings.whichGameMode == 1) {
                 mainFrame.add(new NormalGame(mainPanel));
                 mainFrame.validate();
-            } else if (GameModes.whichGameMode == 2) {
+            } else if (Settings.whichGameMode == 2) {
                 mainFrame.add(new DrawGame(mainPanel));
                 mainFrame.validate();
             }
-        });
-
-        GAMEMODESButton.addActionListener(e -> {
-            mainFrame.getContentPane().removeAll();
-            mainFrame.getContentPane().repaint();
-            mainFrame.add(new GameModes(mainPanel).mainPanel);
-            mainFrame.validate();
         });
 
         SETTINGSButton.addActionListener(e -> {

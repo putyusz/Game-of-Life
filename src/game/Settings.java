@@ -6,6 +6,8 @@
 package game;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.io.*;
 
 import static java.lang.Integer.parseInt;
@@ -28,25 +30,21 @@ public class Settings extends JPanel implements Serializable {
     JPanel popPanel;
     JPanel delayPanel;
 
-    private JTextField populationTextField;
-    private JTextField delayTextField;
-
     private JButton backButton;
     private JPanel settingsPanel;
+    private JPanel modesPanel;
+    private JRadioButton normalRadioButton;
+    private JRadioButton drawRadioButton;
+    private JSlider popSlider;
+    private JSlider delaySlider;
 
     static int whichMode = 1;
     static int whichColor = 1;
+    static int whichGameMode = 1;
     static int population = 2500;
     static int delay = 5000;
     static boolean crazyRainbow = false;
     private int whichWasLast = 1;
-
-    private boolean isInteger(String s) {
-        for (char c : s.toCharArray()) {
-            if (!Character.isDigit(c)) return false;
-        }
-        return true;
-    }
 
     Settings(JPanel mainPanel) {
 
@@ -87,6 +85,16 @@ public class Settings extends JPanel implements Serializable {
                 break;
             case 5:
                 REDRadioButton.setSelected(true);
+                break;
+        }
+
+        switch (whichGameMode) {
+            case 1:
+                normalRadioButton.setSelected(true);
+                break;
+            case 2:
+                drawRadioButton.setSelected(true);
+                break;
         }
 
         rainbowDotsRadioButton.addActionListener(e -> {
@@ -160,20 +168,22 @@ public class Settings extends JPanel implements Serializable {
             MainForm.mainFrame.validate();
         });
 
-        populationTextField.addActionListener(e -> {
-            if (isInteger(populationTextField.getText())) {
-                population = parseInt(populationTextField.getText());
-            } else {
-                population = 2500;
+        popSlider.addChangeListener(e -> {
+            JSlider source = (JSlider)e.getSource();
+            if (!source.getValueIsAdjusting()) {
+                population = source.getValue();
             }
         });
 
-        delayTextField.addActionListener(e -> {
-            if (isInteger(delayTextField.getText())) {
-                delay = parseInt(delayTextField.getText());
-            } else {
-                delay = 5000;
+        delaySlider.addChangeListener(e -> {
+            JSlider source = (JSlider)e.getSource();
+            if (!source.getValueIsAdjusting() ){
+                delay = source.getValue();
             }
         });
+
+        normalRadioButton.addActionListener(e -> whichGameMode = 1);
+
+        drawRadioButton.addActionListener(e -> whichGameMode = 2);
     }
 }
