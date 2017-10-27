@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class MainForm {
     static JFrame mainFrame = new JFrame("Game of Life");
-    JPanel mainPanel;
+    private JPanel mainPanel;
 
     private JButton SETTINGSButton;
     private JButton EXITButton;
@@ -19,23 +19,21 @@ public class MainForm {
     private JButton STARTGAMEButton;
 
     private JPanel buttonsPanel;
+    private JLabel pictureLabel;
 
     MainForm() {
-        //URL backgroundURL = MainForm.class.getResource("Background.png");
         URL iconURL = MainForm.class.getResource("GameIcon.png" /*"GhostIcon.png"*/);
         ImageIcon icon = new ImageIcon(iconURL);
-        //ImageIcon backGround = new ImageIcon(backgroundURL);
 
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
+
         mainFrame.setIconImage(icon.getImage());
-
-//        JLabel bg = new JLabel(backGround);
-
         mainFrame.add(mainPanel);
-        mainFrame.setMinimumSize(new Dimension(800, 450));
-        mainFrame.setSize(new Dimension(960, 540));
+//        mainFrame.setMinimumSize(new Dimension(800, 450));
+//        mainFrame.setSize(new Dimension(960, 540));
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        mainFrame.setUndecorated(true);
+        mainFrame.setVisible(true);
 
         STARTGAMEButton.addActionListener(e -> {
             mainFrame.getContentPane().removeAll();

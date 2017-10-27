@@ -17,7 +17,7 @@ public class NormalGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
-    private int s = height / 10 - 6, o = width / 10;
+    private int s = height / 10, o = width / 10;
     private ArrayList<ArrayList<Cell>> Table = new ArrayList<>();
 
     private Timer timer = new Timer(Settings.delay / 60, this);

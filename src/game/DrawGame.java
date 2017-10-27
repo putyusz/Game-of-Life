@@ -15,7 +15,7 @@ public class DrawGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
-    private int s = height / 10 - 6, o = width / 10, x = 0, y = 0;
+    private int s = height / 10, o = width / 10, x = 0, y = 0;
 
     private ArrayList<ArrayList<Cell>> Table = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class DrawGame extends JPanel implements ActionListener {
         JButton startButton = new JButton("START");
         startButton.setForeground(new Color(255, 255, 255));
         startButton.setBackground(new Color(49, 49, 49));
-        startButton.setBounds(exitButton.getWidth() + 10, 0, 70, 30);
+        startButton.setBounds(exitButton.getWidth() + 10, 0, 90, 30);
 
         JButton restartButton = new JButton("RESTART");
         restartButton.setForeground(new Color(255, 255, 255));
@@ -105,17 +105,19 @@ public class DrawGame extends JPanel implements ActionListener {
     }
 
     private void createCell1(int x, int y) {
-        if (!Table.get(y).get(x).getStatus()) {
-            Table.get(y).get(x).setStatus(true);
-            if (beforeStartDrawing) {
-                Points.add(new Point(x, y));
-                repaint();
+        if (x < o && y < s && x >= 0 && y >= 0) {
+            if (!Table.get(y).get(x).getStatus()) {
+                Table.get(y).get(x).setStatus(true);
+                if (beforeStartDrawing) {
+                    Points.add(new Point(x, y));
+                    repaint();
+                }
             }
         }
     }
 
     private void createCell2(int x, int y) {
-        if (x < o && y < s) {
+        if (x < o && y < s && x >= 0 && y >= 0) {
             if (Table.get(y).get(x).getStatus()) {
                 if (beforeStartDrawing) {
                     Table.get(y).get(x).setStatus(false);
