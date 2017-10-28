@@ -150,7 +150,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Ghost cells"/>
@@ -164,7 +164,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <horizontalAlignment value="2"/>
@@ -179,7 +179,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Crazy Rainbow cells"/>
@@ -193,7 +193,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Rainbow cells"/>
@@ -225,7 +225,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="BLUE"/>
@@ -238,7 +238,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="CYAN"/>
@@ -251,7 +251,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="GREEN"/>
@@ -264,7 +264,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="YELLOW"/>
@@ -277,7 +277,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="RED"/>
@@ -321,7 +321,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <selected value="false"/>
@@ -336,7 +336,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Draw"/>
@@ -429,7 +429,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Circle"/>
@@ -442,7 +442,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-12237499"/>
+                  <background color="-13553359"/>
                   <font name="Arial" size="16"/>
                   <foreground color="-1"/>
                   <text value="Square"/>

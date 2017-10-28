@@ -9,16 +9,19 @@ import java.io.*;
 
 class SettingsData implements Serializable {
     private static long serialVersionUID = -1;
+
     private int whichDrawMode = 1;
     private int whichColor = 1;
     private int whichGameMode = 1;
     private int whichWasLast = 1;
     private int population = 2500;
     private int delay = 5000;
-    private int shape = 1;
+    private int whichShape = 1;
     private boolean crazyRainbow = false;
 
-    SettingsData() {}
+    SettingsData() {
+
+    }
 
     boolean isCrazyRainbow() {
         return crazyRainbow;
@@ -76,6 +79,14 @@ class SettingsData implements Serializable {
         this.whichDrawMode = whichDrawMode;
     }
 
+    int getWhichShape() {
+        return whichShape;
+    }
+
+    void setWhichShape(int whichShape) {
+        this.whichShape = whichShape;
+    }
+
     void writeSettings(SettingsData data) {
         try {
             FileOutputStream f = new FileOutputStream("settings");
@@ -94,18 +105,19 @@ class SettingsData implements Serializable {
             ObjectInputStream in = new ObjectInputStream(f);
             data = (SettingsData) in.readObject();
             in.close();
+            setWhichShape(data.getWhichShape());
+            setDelay(data.getDelay());
+            setCrazyRainbow(data.isCrazyRainbow());
+            setPopulation(data.getPopulation());
+            setWhichWasLast(data.getWhichWasLast());
+            setWhichGameMode(data.getWhichGameMode());
+            setWhichDrawMode(data.getWhichDrawMode());
+            setWhichColor(data.getWhichColor());
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return data;
-    }
-
-    public int getShape() {
-        return shape;
-    }
-
-    public void setShape(int shape) {
-        this.shape = shape;
     }
 }
 

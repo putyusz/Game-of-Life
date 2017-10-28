@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static game.MainForm.data;
+
 class Cell {
     private boolean status, nextstatus;
 
@@ -60,7 +62,8 @@ class Cell {
 
     private void DrawCell(int x, int y, Graphics g) {
         Color randomColor;
-        if (Settings.crazyRainbow) {
+
+        if (data.isCrazyRainbow()) {
             R = (int) (Math.random() * 256);
             G = (int) (Math.random() * 256);
             B = (int) (Math.random() * 256);
@@ -70,18 +73,19 @@ class Cell {
             randomColor = new Color(R, G, B);
         }
         g.setColor(randomColor);
-        if (Settings.whichShape == 1) {
+        if (data.getWhichShape() == 1) {
             g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
-        } else if (Settings.whichShape == 2) {
+        } else if (data.getWhichShape() == 2) {
             g.fillRect(x + 1, y + 1, 8,8);
         }
     }
 
     void DrawCell(int x, int y, Graphics g, Color c) {
         g.setColor(c);
-        if (Settings.whichShape == 1) {
+
+        if (data.getWhichShape() == 1) {
             g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
-        } else if (Settings.whichShape == 2) {
+        } else if (data.getWhichShape() == 2) {
             g.fillRect(x + 1, y + 1, 8,8);
         }
     }
@@ -222,16 +226,17 @@ class Cell {
     void screenDrawer(int s, int o, Graphics g, ArrayList<ArrayList<Cell>> Table, ImageIcon Ghost) {
         //iteraciok
         //kirajzolas
+
         int x = 0, y = 0;
         for (int i = 0; i < s; i++) {
             for (int j = 0; j < o; j++) {
                 if (Table.get(i).get(j).getStatus()) {
-                    if (Settings.whichDrawMode == 1) {
+                    if (data.getWhichDrawMode() == 1) {
                         Table.get(i).get(j).DrawCell(x, y, g);
-                    } else if (Settings.whichDrawMode == 2) {
+                    } else if (data.getWhichDrawMode() == 2) {
                         Table.get(i).get(j).DrawCell(x, y, g, Ghost);
-                    } else if (Settings.whichDrawMode == 3) {
-                        switch (Settings.whichColor) {
+                    } else if (data.getWhichDrawMode() == 3) {
+                        switch (data.getWhichColor()) {
                             case 1:
                                 Table.get(i).get(j).DrawCell(x, y, g, Color.BLUE);
                                 break;

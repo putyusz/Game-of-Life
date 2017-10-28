@@ -13,32 +13,31 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static game.MainForm.data;
+import static game.MainForm.mainFrame;
+
 public class NormalGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
-    private int s = height / 10, o = width / 10;
+    private int s = height / 10 - 2, o = width / 10;
     private ArrayList<ArrayList<Cell>> Table = new ArrayList<>();
-
-    private Timer timer = new Timer(Settings.delay / 60, this);
-
     private URL ghostURL = NormalGame.class.getResource("Ghost.jpg");
     private ImageIcon Ghost = new ImageIcon(ghostURL);
 
+    private Timer timer;
+
     //ArrayList<Integer> ints;
 
-    NormalGame(JPanel mainPanel) {
-        JButton exitButton = new JButton("EXIT");
-        exitButton.setForeground(new Color(255, 255, 255));
-        exitButton.setBackground(new Color(49, 49, 49));
-        exitButton.setSize(50, 30);
-        exitButton.setBounds(0, 0, 70, 30);
-
-        setPreferredSize(new Dimension(960, 540));
+    NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem exitItem) {
         setBackground(new Color(69, 69, 69));
         setLayout(null);
-        add(exitButton);
 
+        menuBar.setVisible(true);
+
+        exitItem.setEnabled(true);
+
+        timer = new Timer(data.getDelay() / 60, this);
         timer.start();
 
         //alap tabla
@@ -47,7 +46,7 @@ public class NormalGame extends JPanel implements ActionListener {
             for (int j = 0; j < o; j++) {
                 Random rand = new Random();
                 int k = rand.nextInt(10000);
-                if (k < Settings.population) {
+                if (k < data.getPopulation()) {
                     Row.add(new Cell(true, false));
                 } else {
                     Row.add(new Cell(false, false));
@@ -56,11 +55,15 @@ public class NormalGame extends JPanel implements ActionListener {
             Table.add(Row);
         }
 
-        exitButton.addActionListener(e -> {
-            MainForm.mainFrame.getContentPane().removeAll();
-            MainForm.mainFrame.getContentPane().repaint();
-            MainForm.mainFrame.add(mainPanel);
-            MainForm.mainFrame.validate();
+        exitItem.addActionListener(e -> {
+            menuBar.setVisible(false);
+
+            exitItem.setEnabled(false);
+
+            mainFrame.getContentPane().removeAll();
+            mainFrame.getContentPane().repaint();
+            mainFrame.add(mainPanel);
+            mainFrame.validate();
             timer.stop();
         });
 

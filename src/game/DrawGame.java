@@ -11,15 +11,18 @@ import java.awt.event.*;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static game.MainForm.data;
+import static game.MainForm.mainFrame;
+
 public class DrawGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
-    private int s = height / 10, o = width / 10, x = 0, y = 0;
+    private int s = height / 10 - 2, o = width / 10, x = 0, y = 0;
 
     private ArrayList<ArrayList<Cell>> Table = new ArrayList<>();
 
-    private Timer timer = new Timer(Settings.delay / 60, this);
+    private Timer timer;
 
     private URL ghostURL = DrawGame.class.getResource("Ghost.jpg");
     private ImageIcon Ghost = new ImageIcon(ghostURL);
@@ -30,43 +33,24 @@ public class DrawGame extends JPanel implements ActionListener {
 
     private boolean beforeStartDrawing = true;
 
-    DrawGame(JPanel mainPanel) {
-        JButton exitButton = new JButton("EXIT");
-        exitButton.setForeground(new Color(255, 255, 255));
-        exitButton.setBackground(new Color(49, 49, 49));
-        exitButton.setBounds(0, 0, 70, 30);
-
-        JButton startButton = new JButton("START");
-        startButton.setForeground(new Color(255, 255, 255));
-        startButton.setBackground(new Color(49, 49, 49));
-        startButton.setBounds(exitButton.getWidth() + 10, 0, 90, 30);
-
-        JButton restartButton = new JButton("RESTART");
-        restartButton.setForeground(new Color(255, 255, 255));
-        restartButton.setBackground(new Color(49, 49, 49));
-        restartButton.setBounds(exitButton.getWidth() + 10 + startButton.getWidth() + 10, 0, 100, 30);
-
-        setPreferredSize(new Dimension(960, 540));
+    DrawGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem) {
         setBackground(new Color(69, 69, 69));
         setLayout(null);
-        add(exitButton);
-        add(startButton);
-        add(restartButton);
 
-        exitButton.addActionListener(e -> {
-            MainForm.mainFrame.getContentPane().removeAll();
-            MainForm.mainFrame.getContentPane().repaint();
-            MainForm.mainFrame.add(mainPanel);
-            MainForm.mainFrame.validate();
-            timer.stop();
-        });
+        menuBar.setVisible(true);
 
-        startButton.addActionListener(e -> {
+        startItem.setEnabled(true);
+        restartItem.setEnabled(true);
+        exitItem.setEnabled(true);
+
+        timer = new Timer(data.getDelay() / 60, this);
+
+        startItem.addActionListener(e -> {
             timer.start();
             beforeStartDrawing = false;
         });
 
-        restartButton.addActionListener(e -> {
+        restartItem.addActionListener(e -> {
             beforeStartDrawing = true;
             repaint();
             timer.stop();
@@ -86,6 +70,20 @@ public class DrawGame extends JPanel implements ActionListener {
             public void mousePressed(MouseEvent e) {
                 panelMousePressed(e);
             }
+        });
+
+        exitItem.addActionListener(e -> {
+            menuBar.setVisible(false);
+
+            startItem.setEnabled(false);
+            restartItem.setEnabled(false);
+            exitItem.setEnabled(false);
+
+            mainFrame.getContentPane().removeAll();
+            mainFrame.getContentPane().repaint();
+            mainFrame.add(mainPanel);
+            mainFrame.validate();
+            timer.stop();
         });
 
         addMouseMotionListener(new MouseMotionAdapter() {
