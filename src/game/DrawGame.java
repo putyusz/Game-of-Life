@@ -8,26 +8,13 @@ package game;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
 import java.util.ArrayList;
 
 import static game.MainForm.data;
 import static game.MainForm.mainFrame;
 
-public class DrawGame extends JPanel implements ActionListener {
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private int width = (int) screenSize.getWidth();
-    private int height = (int) screenSize.getHeight();
-    private int s = height / 10 - 2, o = width / 10, x = 0, y = 0;
-
-    private ArrayList<ArrayList<Cell>> Table = new ArrayList<>();
-
-    private Timer timer;
-
-    private URL ghostURL = DrawGame.class.getResource("Ghost.jpg");
-    private ImageIcon Ghost = new ImageIcon(ghostURL);
-
-    private Cell c = new Cell();
+class DrawGame extends NormalGame implements ActionListener {
+    private int x = 0, y = 0;
 
     private ArrayList<Point> Points = new ArrayList<>();
 
@@ -54,21 +41,14 @@ public class DrawGame extends JPanel implements ActionListener {
             beforeStartDrawing = true;
             repaint();
             timer.stop();
-            Table.clear();
+            table.clear();
             Points.clear();
-            for (int i = 0; i < s; i++) {
+            for (int i = 0; i < row; i++) {
                 ArrayList<Cell> Row = new ArrayList<>();
-                for (int j = 0; j < o; j++) {
+                for (int j = 0; j < column; j++) {
                     Row.add(new Cell(false, false));
                 }
-                Table.add(Row);
-            }
-        });
-
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                panelMousePressed(e);
+                table.add(Row);
             }
         });
 
@@ -86,6 +66,13 @@ public class DrawGame extends JPanel implements ActionListener {
             timer.stop();
         });
 
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                panelMousePressed(e);
+            }
+        });
+
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -93,19 +80,19 @@ public class DrawGame extends JPanel implements ActionListener {
             }
         });
 
-        for (int i = 0; i < s; i++) {
+        for (int i = 0; i < row; i++) {
             ArrayList<Cell> Row = new ArrayList<>();
-            for (int j = 0; j < o; j++) {
+            for (int j = 0; j < column; j++) {
                 Row.add(new Cell(false, false));
             }
-            Table.add(Row);
+            table.add(Row);
         }
     }
 
     private void createCell1(int x, int y) {
-        if (x < o && y < s && x >= 0 && y >= 0) {
-            if (!Table.get(y).get(x).getStatus()) {
-                Table.get(y).get(x).setStatus(true);
+        if (x < column && y < row && x >= 0 && y >= 0) {
+            if (!table.get(y).get(x).getStatus()) {
+                table.get(y).get(x).setStatus(true);
                 if (beforeStartDrawing) {
                     Points.add(new Point(x, y));
                     repaint();
@@ -115,10 +102,10 @@ public class DrawGame extends JPanel implements ActionListener {
     }
 
     private void createCell2(int x, int y) {
-        if (x < o && y < s && x >= 0 && y >= 0) {
-            if (Table.get(y).get(x).getStatus()) {
+        if (x < column && y < row && x >= 0 && y >= 0) {
+            if (table.get(y).get(x).getStatus()) {
                 if (beforeStartDrawing) {
-                    Table.get(y).get(x).setStatus(false);
+                    table.get(y).get(x).setStatus(false);
                     Points.remove(new Point(x, y));
                     repaint();
                 }
@@ -140,23 +127,16 @@ public class DrawGame extends JPanel implements ActionListener {
         createCell1(x, y);
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    @Override
+    void paintScreen(Graphics g) {
         if (beforeStartDrawing) {
             for (Point point : Points) {
-                c.DrawCell(point.x * 10, point.y * 10, g, new Color(49, 49, 49));
+                g.fillRoundRect(point.x + 1, point.y + 1, 8, 8, 8, 8);
             }
         } else {
-            c.screenDrawer(s, o, g, Table, Ghost);
-            Table = c.GameAlgorithm(s, o, Table);
+            screenDrawer(g);
+            GameAlgorithm();
         }
-        c.gridDrawer(g,s,o,height,width);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent s) {
-        if (s.getSource() == timer) {
-            repaint();
-        }
+        gridDrawer(g);
     }
 }

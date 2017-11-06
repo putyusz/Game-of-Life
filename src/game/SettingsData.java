@@ -1,5 +1,5 @@
 /*
- * Created by Ponekker Patrik on $today.year.month.day
+ * Created by Ponekker Patrik on 29/10/17
  * Copyright (c) 2017.
  */
 
@@ -10,13 +10,29 @@ import java.io.*;
 class SettingsData implements Serializable {
     private static long serialVersionUID = -1;
 
+    public enum Color {
+        BLUE, CYAN, GREEN, YELLOW, RED
+    }
+
+    public enum GameMode {
+        NORMAL, DRAW
+    }
+
+    public enum Shape {
+        CIRCLE, SQUARE
+    }
+
+    public enum DrawMode {
+
+    }
+
     private int whichDrawMode = 1;
-    private int whichColor = 1;
-    private int whichGameMode = 1;
+    private Color color = Color.BLUE;
+    private GameMode gameMode = GameMode.NORMAL;
     private int whichWasLast = 1;
     private int population = 2500;
     private int delay = 5000;
-    private int whichShape = 1;
+    private Shape shape = Shape.CIRCLE;
     private boolean crazyRainbow = false;
 
     private String settingsPath = System.getenv("APPDATA");
@@ -59,20 +75,20 @@ class SettingsData implements Serializable {
         this.whichWasLast = whichWasLast;
     }
 
-    int getWhichGameMode() {
-        return whichGameMode;
+    GameMode getGameMode() {
+        return gameMode;
     }
 
-    void setWhichGameMode(int whichGameMode) {
-        this.whichGameMode = whichGameMode;
+    void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
-    int getWhichColor() {
-        return whichColor;
+    Color getColor() {
+        return color;
     }
 
-    void setWhichColor(int whichColor) {
-        this.whichColor = whichColor;
+    void setColor(Color color) {
+        this.color = color;
     }
 
     int getWhichDrawMode() {
@@ -83,12 +99,12 @@ class SettingsData implements Serializable {
         this.whichDrawMode = whichDrawMode;
     }
 
-    int getWhichShape() {
-        return whichShape;
+    Shape getShape() {
+        return shape;
     }
 
-    void setWhichShape(int whichShape) {
-        this.whichShape = whichShape;
+    void setShape(Shape shape) {
+        this.shape = shape;
     }
 
     void writeSettings(SettingsData data) {
@@ -109,14 +125,14 @@ class SettingsData implements Serializable {
             ObjectInputStream in = new ObjectInputStream(f);
             data = (SettingsData) in.readObject();
             in.close();
-            setWhichShape(data.getWhichShape());
+            setShape(data.getShape());
             setDelay(data.getDelay());
             setCrazyRainbow(data.isCrazyRainbow());
             setPopulation(data.getPopulation());
             setWhichWasLast(data.getWhichWasLast());
-            setWhichGameMode(data.getWhichGameMode());
+            setGameMode(data.getGameMode());
             setWhichDrawMode(data.getWhichDrawMode());
-            setWhichColor(data.getWhichColor());
+            setColor(data.getColor());
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

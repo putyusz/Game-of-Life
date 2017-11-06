@@ -10,6 +10,9 @@ import java.io.*;
 
 import static game.MainForm.data;
 import static game.MainForm.mainFrame;
+import static game.SettingsData.Color.*;
+import static game.SettingsData.Shape.*;
+import static game.SettingsData.GameMode.*;
 
 public class Settings extends JPanel implements Serializable {
 
@@ -67,38 +70,38 @@ public class Settings extends JPanel implements Serializable {
 
         }
 
-        switch (data.getWhichColor()) {
-            case 1:
+        switch (data.getColor()) {
+            case BLUE:
                 BLUERadioButton.setSelected(true);
                 break;
-            case 2:
+            case CYAN:
                 CYANRadioButton.setSelected(true);
                 break;
-            case 3:
+            case GREEN:
                 GREENRadioButton.setSelected(true);
                 break;
-            case 4:
+            case YELLOW:
                 YELLOWRadioButton.setSelected(true);
                 break;
-            case 5:
+            case RED:
                 REDRadioButton.setSelected(true);
                 break;
         }
 
-        switch (data.getWhichGameMode()) {
-            case 1:
+        switch (data.getGameMode()) {
+            case NORMAL:
                 normalRadioButton.setSelected(true);
                 break;
-            case 2:
+            case DRAW:
                 drawRadioButton.setSelected(true);
                 break;
         }
 
-        switch (data.getWhichShape()) {
-            case 1:
+        switch (data.getShape()) {
+            case CIRCLE:
                 circleRadioButton.setSelected(true);
                 break;
-            case 2:
+            case SQUARE:
                 squareRadioButton.setSelected(true);
                 break;
         }
@@ -144,27 +147,27 @@ public class Settings extends JPanel implements Serializable {
         });
 
         BLUERadioButton.addActionListener(e -> {
-            data.setWhichColor(1);
+            data.setColor(BLUE);
             BLUERadioButton.setSelected(true);
         });
 
         CYANRadioButton.addActionListener(e -> {
-            data.setWhichColor(2);
+            data.setColor(CYAN);
             CYANRadioButton.setSelected(true);
         });
 
         GREENRadioButton.addActionListener(e -> {
-            data.setWhichColor(3);
+            data.setColor(GREEN);
             GREENRadioButton.setSelected(true);
         });
 
         YELLOWRadioButton.addActionListener(e -> {
-            data.setWhichColor(4);
+            data.setColor(YELLOW);
             YELLOWRadioButton.setSelected(true);
         });
 
         REDRadioButton.addActionListener(e -> {
-            data.setWhichColor(5);
+            data.setColor(RED);
             REDRadioButton.setSelected(true);
         });
 
@@ -190,12 +193,12 @@ public class Settings extends JPanel implements Serializable {
             }
         });
 
-        normalRadioButton.addActionListener(e -> data.setWhichGameMode(1));
+        normalRadioButton.addActionListener(e -> data.setGameMode(NORMAL));
 
-        drawRadioButton.addActionListener(e -> data.setWhichGameMode(2));
+        drawRadioButton.addActionListener(e -> data.setGameMode(DRAW));
 
-        circleRadioButton.addActionListener(e -> data.setWhichShape(1));
+        circleRadioButton.addActionListener(e -> data.setShape(CIRCLE));
 
-        squareRadioButton.addActionListener(e -> data.setWhichShape(2));
+        squareRadioButton.addActionListener(e -> data.setShape(SQUARE));
     }
 }

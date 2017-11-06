@@ -1,5 +1,5 @@
 /*
- * Created by Ponekker Patrik on $today.year.month.day
+ * Created by Ponekker Patrik on 15/10/17
  * Copyright (c) 2017.
  */
 
@@ -8,6 +8,8 @@ package game;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+
+import static game.SettingsData.GameMode.*;
 
 public class MainForm {
     static JFrame mainFrame = new JFrame("Game of Life");
@@ -65,10 +67,10 @@ public class MainForm {
             mainFrame.getContentPane().removeAll();
             mainFrame.getContentPane().repaint();
 
-            if (data.getWhichGameMode() == 1) {
+            if (data.getGameMode() == NORMAL) {
                 mainFrame.add(new NormalGame(mainPanel, menuBar, exitItem));
                 mainFrame.validate();
-            } else if (data.getWhichGameMode() == 2) {
+            } else if (data.getGameMode() == DRAW) {
                 mainFrame.add(new DrawGame(mainPanel, menuBar, startItem, restartItem, exitItem));
                 mainFrame.validate();
             }
