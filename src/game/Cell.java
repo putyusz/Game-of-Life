@@ -12,59 +12,60 @@ import static game.MainForm.data;
 import static game.SettingsData.Shape.*;
 
 class Cell {
-    private boolean status, nextstatus;
+    private boolean status, nextStatus;
 
-    private int R = (int) (Math.random() * 256);
-    private int G = (int) (Math.random() * 256);
-    private int B = (int) (Math.random() * 256);
+    private int R, G, B;
 
-    Cell(boolean s, boolean ns) {
-        status = s;
-        nextstatus = ns;
+    private Color randomColor;
+
+    Cell(boolean status, boolean nextStatus) {
+        this.status = status;
+        this.nextStatus = nextStatus;
+
+        R = (int) (Math.random() * 256);
+        G = (int) (Math.random() * 256);
+        B = (int) (Math.random() * 256);
+        randomColor = new Color(R, G, B);
     }
 
     boolean getStatus() {
         return status;
     }
 
-    void setStatus(boolean s) {
-        status = s;
+    void setStatus(boolean status) {
+        this.status = status;
     }
 
-    boolean getNextstatus() {
-        return nextstatus;
+    boolean getNextStatus() {
+        return nextStatus;
     }
 
-    void setNextstatus(boolean ns) {
-        nextstatus = ns;
+    private void setNextStatus(boolean nextStatus) {
+        this.nextStatus = nextStatus;
     }
 
     void live(Cell c, int count) {
         if (c.getStatus()) {
             if (count == 2 || count == 3) {
-                c.setNextstatus(true);
+                c.setNextStatus(true);
             } else {
-                c.setNextstatus(false);
+                c.setNextStatus(false);
             }
         } else {
             if (count == 3) {
-                c.setNextstatus(true);
+                c.setNextStatus(true);
             } else {
-                c.setNextstatus(false);
+                c.setNextStatus(false);
             }
         }
     }
 
     void DrawCell(int x, int y, Graphics g) {
-        Color randomColor;
-
         if (data.isCrazyRainbow()) {
             R = (int) (Math.random() * 256);
             G = (int) (Math.random() * 256);
             B = (int) (Math.random() * 256);
 
-            randomColor = new Color(R, G, B);
-        } else {
             randomColor = new Color(R, G, B);
         }
         g.setColor(randomColor);

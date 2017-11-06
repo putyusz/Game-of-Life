@@ -16,8 +16,6 @@ import static game.MainForm.mainFrame;
 class DrawGame extends NormalGame implements ActionListener {
     private int x = 0, y = 0;
 
-    private ArrayList<Point> Points = new ArrayList<>();
-
     private boolean beforeStartDrawing = true;
 
     DrawGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem) {
@@ -42,7 +40,6 @@ class DrawGame extends NormalGame implements ActionListener {
             repaint();
             timer.stop();
             table.clear();
-            Points.clear();
             for (int i = 0; i < row; i++) {
                 ArrayList<Cell> Row = new ArrayList<>();
                 for (int j = 0; j < column; j++) {
@@ -89,28 +86,18 @@ class DrawGame extends NormalGame implements ActionListener {
         }
     }
 
-    private void createCell1(int x, int y) {
-        if (x < column && y < row && x >= 0 && y >= 0) {
-            if (!table.get(y).get(x).getStatus()) {
-                table.get(y).get(x).setStatus(true);
-                if (beforeStartDrawing) {
-                    Points.add(new Point(x, y));
-                    repaint();
-                }
-            }
-        }
-    }
-
-    private void createCell2(int x, int y) {
-        if (x < column && y < row && x >= 0 && y >= 0) {
+    private void createCell(int x, int y) {
+        if (0 <= x && x < column && 0 <= y && y < row) {
             if (table.get(y).get(x).getStatus()) {
+                table.get(y).get(x).setStatus(false);
                 if (beforeStartDrawing) {
-                    table.get(y).get(x).setStatus(false);
-                    Points.remove(new Point(x, y));
                     repaint();
                 }
             } else {
-                createCell1(x, y);
+                table.get(y).get(x).setStatus(true);
+                if (beforeStartDrawing) {
+                    repaint();
+                }
             }
         }
     }
@@ -118,20 +105,24 @@ class DrawGame extends NormalGame implements ActionListener {
     private void panelMousePressed(MouseEvent e) {
         x = e.getX() / 10;
         y = e.getY() / 10;
-        createCell2(x, y);
+        createCell(x, y);
     }
 
     private void panelMouseDragged(MouseEvent e) {
         x = e.getX() / 10;
         y = e.getY() / 10;
-        createCell1(x, y);
+        createCell(x, y);
     }
 
     @Override
     void paintScreen(Graphics g) {
         if (beforeStartDrawing) {
-            for (Point point : Points) {
-                g.fillRoundRect(point.x + 1, point.y + 1, 8, 8, 8, 8);
+            for ( int i = 0; i < row; i++){
+                for ( int j = 0; j < column; j++){
+                    if(table.get(i).get(j).getStatus()){
+                        g.fillRoundRect(j * 10 + 1, i * 10 + 1, 8, 8, 8, 8);
+                    }
+                }
             }
         } else {
             screenDrawer(g);

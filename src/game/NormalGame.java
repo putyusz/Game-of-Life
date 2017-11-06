@@ -200,7 +200,7 @@ public class NormalGame extends JPanel implements ActionListener {
         //feluliras
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                table.get(i).get(j).setStatus(table.get(i).get(j).getNextstatus());
+                table.get(i).get(j).setStatus(table.get(i).get(j).getNextStatus());
             }
         }
     }
