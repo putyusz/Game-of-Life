@@ -19,6 +19,10 @@ class SettingsData implements Serializable {
     private int whichShape = 1;
     private boolean crazyRainbow = false;
 
+    private String settingsPath = System.getenv("APPDATA");
+    private File settingsFile = new File(settingsPath,"settings").getAbsoluteFile();
+
+
     SettingsData() {
 
     }
@@ -89,7 +93,7 @@ class SettingsData implements Serializable {
 
     void writeSettings(SettingsData data) {
         try {
-            FileOutputStream f = new FileOutputStream("settings");
+            FileOutputStream f = new FileOutputStream(settingsFile);
             ObjectOutputStream out = new ObjectOutputStream(f);
             out.writeObject(data);
             out.close();
@@ -101,7 +105,7 @@ class SettingsData implements Serializable {
     SettingsData readSettings() {
         SettingsData data = new SettingsData();
         try {
-            FileInputStream f = new FileInputStream("settings");
+            FileInputStream f = new FileInputStream(settingsFile);
             ObjectInputStream in = new ObjectInputStream(f);
             data = (SettingsData) in.readObject();
             in.close();

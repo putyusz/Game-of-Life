@@ -48,8 +48,6 @@ public class Settings extends JPanel implements Serializable {
         YELLOWRadioButton.setEnabled(false);
         REDRadioButton.setEnabled(false);
 
-        data = data.readSettings();
-
         popSlider.setValue(data.getPopulation());
         delaySlider.setValue(data.getDelay());
 
