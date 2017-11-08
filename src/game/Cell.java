@@ -7,6 +7,8 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
+
 
 import static game.MainForm.data;
 import static game.SettingsData.Shape.*;

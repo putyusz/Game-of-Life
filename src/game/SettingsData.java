@@ -23,10 +23,10 @@ class SettingsData implements Serializable {
     }
 
     public enum DrawMode {
-
+        RAINBOW, CRAZY_RAINBOW, GHOST, COLORED
     }
 
-    private int whichDrawMode = 1;
+    private DrawMode drawMode = DrawMode.RAINBOW;
     private Color color = Color.BLUE;
     private GameMode gameMode = GameMode.NORMAL;
     private int whichWasLast = 1;
@@ -91,12 +91,12 @@ class SettingsData implements Serializable {
         this.color = color;
     }
 
-    int getWhichDrawMode() {
-        return whichDrawMode;
+    DrawMode getDrawMode() {
+        return drawMode;
     }
 
-    void setWhichDrawMode(int whichDrawMode) {
-        this.whichDrawMode = whichDrawMode;
+    void setDrawMode(DrawMode drawMode) {
+        this.drawMode = drawMode;
     }
 
     Shape getShape() {
@@ -131,7 +131,7 @@ class SettingsData implements Serializable {
             setPopulation(data.getPopulation());
             setWhichWasLast(data.getWhichWasLast());
             setGameMode(data.getGameMode());
-            setWhichDrawMode(data.getWhichDrawMode());
+            setDrawMode(data.getDrawMode());
             setColor(data.getColor());
 
         } catch (IOException | ClassNotFoundException e) {

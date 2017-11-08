@@ -15,6 +15,7 @@ import java.util.Random;
 
 import static game.MainForm.data;
 import static game.MainForm.mainFrame;
+import static game.SettingsData.DrawMode.*;
 
 public class NormalGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -22,18 +23,22 @@ public class NormalGame extends JPanel implements ActionListener {
     private int height = (int) screenSize.getHeight();
     int row = height / 10 - 2, column = width / 10;
 
-    ArrayList<ArrayList<Cell>> table = new ArrayList<>();
+    ArrayList<ArrayList<Cell>> table;
 
     private URL ghostURL = NormalGame.class.getResource("ghost.jpg");
-    private ImageIcon ghost = new ImageIcon(ghostURL);
+    private ImageIcon ghost;
 
     Timer timer;
 
     NormalGame(){
-
+        table = new ArrayList<>();
+        ghost = new ImageIcon(ghostURL);
     }
 
     NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem exitItem) {
+        table = new ArrayList<>();
+        ghost = new ImageIcon(ghostURL);
+
         setBackground(new Color(69, 69, 69));
         setLayout(null);
 
@@ -213,11 +218,11 @@ public class NormalGame extends JPanel implements ActionListener {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 if (table.get(i).get(j).getStatus()) {
-                    if (data.getWhichDrawMode() == 1) {
+                    if (data.getDrawMode() == RAINBOW || data.getDrawMode() == CRAZY_RAINBOW) {
                         table.get(i).get(j).DrawCell(x, y, g);
-                    } else if (data.getWhichDrawMode() == 2) {
+                    } else if (data.getDrawMode() == GHOST) {
                         table.get(i).get(j).DrawCell(x, y, g, ghost);
-                    } else if (data.getWhichDrawMode() == 3) {
+                    } else if (data.getDrawMode() == COLORED) {
                         switch (data.getColor()) {
                             case BLUE:
                                 table.get(i).get(j).DrawCell(x, y, g, Color.BLUE);

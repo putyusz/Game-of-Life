@@ -11,6 +11,7 @@ import java.io.*;
 import static game.MainForm.data;
 import static game.MainForm.mainFrame;
 import static game.SettingsData.Color.*;
+import static game.SettingsData.DrawMode.*;
 import static game.SettingsData.Shape.*;
 import static game.SettingsData.GameMode.*;
 
@@ -107,43 +108,30 @@ public class Settings extends JPanel implements Serializable {
         }
 
         rainbowDotsRadioButton.addActionListener(e -> {
-            data.setWhichDrawMode(1);
+            data.setDrawMode(RAINBOW);
             data.setCrazyRainbow(false);
             data.setWhichWasLast(1);
-            BLUERadioButton.setEnabled(false);
-            CYANRadioButton.setEnabled(false);
-            GREENRadioButton.setEnabled(false);
-            YELLOWRadioButton.setEnabled(false);
-            REDRadioButton.setEnabled(false);
+            radioButtonsEnabler(false);
         });
 
         crazyRainbowDotsRadioButton.addActionListener(e -> {
-            data.setWhichDrawMode(1);
+            data.setDrawMode(CRAZY_RAINBOW);
             data.setCrazyRainbow(true);
             data.setWhichWasLast(2);
         });
 
         ghostsRadioButton.addActionListener(e -> {
-            data.setWhichDrawMode(2);
+            data.setDrawMode(GHOST);
             data.setCrazyRainbow(false);
             data.setWhichWasLast(3);
-            BLUERadioButton.setEnabled(false);
-            CYANRadioButton.setEnabled(false);
-            GREENRadioButton.setEnabled(false);
-            YELLOWRadioButton.setEnabled(false);
-            REDRadioButton.setEnabled(false);
+            radioButtonsEnabler(false);
         });
 
         coloredDotsRadioButton.addActionListener(e -> {
-            data.setWhichDrawMode(3);
+            data.setDrawMode(COLORED);
             data.setCrazyRainbow(false);
             data.setWhichWasLast(4);
-            BLUERadioButton.setSelected(true);
-            BLUERadioButton.setEnabled(true);
-            CYANRadioButton.setEnabled(true);
-            GREENRadioButton.setEnabled(true);
-            YELLOWRadioButton.setEnabled(true);
-            REDRadioButton.setEnabled(true);
+            radioButtonsEnabler(true);
         });
 
         BLUERadioButton.addActionListener(e -> {
@@ -200,5 +188,13 @@ public class Settings extends JPanel implements Serializable {
         circleRadioButton.addActionListener(e -> data.setShape(CIRCLE));
 
         squareRadioButton.addActionListener(e -> data.setShape(SQUARE));
+    }
+
+    private void radioButtonsEnabler(boolean enabled){
+        BLUERadioButton.setEnabled(enabled);
+        CYANRadioButton.setEnabled(enabled);
+        GREENRadioButton.setEnabled(enabled);
+        YELLOWRadioButton.setEnabled(enabled);
+        REDRadioButton.setEnabled(enabled);
     }
 }
