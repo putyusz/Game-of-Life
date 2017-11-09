@@ -40,17 +40,17 @@ public class MainForm {
         exitItem.setEnabled(false);
 
         JMenu menu = new JMenu("Menu");
-        menu.setBackground(new Color(49,49,49));
-        menu.setForeground(new Color(255,255,255));
+        menu.setBackground(new Color(49, 49, 49));
+        menu.setForeground(new Color(255, 255, 255));
         menu.setBorder(null);
 
         menu.add(startItem);
         menu.add(restartItem);
         menu.add(exitItem);
 
-        menuBar.setBackground(new Color(49,49,49));
+        menuBar.setBackground(new Color(49, 49, 49));
         menuBar.setBorder(null);
-        menuBar.setSize(JFrame.MAXIMIZED_HORIZ,20);
+        menuBar.setSize(JFrame.MAXIMIZED_HORIZ, 20);
         menuBar.add(menu);
 
         menuBar.setVisible(false);
@@ -86,4 +86,5 @@ public class MainForm {
 
         EXITButton.addActionListener(e -> System.exit(0));
     }
+
 }

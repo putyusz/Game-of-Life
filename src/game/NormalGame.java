@@ -21,23 +21,27 @@ public class NormalGame extends JPanel implements ActionListener {
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
-    int row = height / 10 - 2, column = width / 10;
+    int row, column;
 
     ArrayList<ArrayList<Cell>> table;
 
-    private URL ghostURL = NormalGame.class.getResource("ghost.jpg");
+    private URL ghostURL = NormalGame.class.getResource("Ghost.png");
     private ImageIcon ghost;
 
     Timer timer;
 
-    NormalGame(){
+    NormalGame() {
         table = new ArrayList<>();
         ghost = new ImageIcon(ghostURL);
+        row = (height - 20) / data.getCellSize();
+        column = width / data.getCellSize();
     }
 
     NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem exitItem) {
         table = new ArrayList<>();
         ghost = new ImageIcon(ghostURL);
+        row = (height - 20) / data.getCellSize();
+        column = width / data.getCellSize();
 
         setBackground(new Color(69, 69, 69));
         setLayout(null);
@@ -54,7 +58,7 @@ public class NormalGame extends JPanel implements ActionListener {
             ArrayList<Cell> Row = new ArrayList<>();
             for (int j = 0; j < column; j++) {
                 Random rand = new Random();
-                int k = rand.nextInt(10000);
+                int k = rand.nextInt(100);
                 if (k < data.getPopulation()) {
                     Row.add(new Cell(true, false));
                 } else {
@@ -223,46 +227,30 @@ public class NormalGame extends JPanel implements ActionListener {
                     } else if (data.getDrawMode() == GHOST) {
                         table.get(i).get(j).DrawCell(x, y, g, ghost);
                     } else if (data.getDrawMode() == COLORED) {
-                        switch (data.getColor()) {
-                            case BLUE:
-                                table.get(i).get(j).DrawCell(x, y, g, Color.BLUE);
-                                break;
-                            case CYAN:
-                                table.get(i).get(j).DrawCell(x, y, g, Color.CYAN);
-                                break;
-                            case GREEN:
-                                table.get(i).get(j).DrawCell(x, y, g, Color.GREEN);
-                                break;
-                            case YELLOW:
-                                table.get(i).get(j).DrawCell(x, y, g, Color.YELLOW);
-                                break;
-                            case RED:
-                                table.get(i).get(j).DrawCell(x, y, g, Color.RED);
-                                break;
-                        }
+                        table.get(i).get(j).DrawCell(x, y, g, data.getColor());
                     }
                 }
-                x += 10;
+                x += data.getCellSize();
             }
             x = 0;
-            y += 10;
+            y += data.getCellSize();
         }
     }
 
     void gridDrawer(Graphics g) {
         int m = 0, n = 0;
-        for (int i = 0; i < row; i++){
-            for (int j = 0; j < column; j++){
-                g.setColor(new Color(49,49,49));
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                g.setColor(new Color(49, 49, 49));
                 g.drawLine(m, 0, m, height);
-                g.drawLine(0, n, width,  n);
-                m += 10;
-                n += 10;
+                g.drawLine(0, n, width, n);
+                m += data.getCellSize();
+                n += data.getCellSize();
             }
         }
     }
 
-    void paintScreen(Graphics g){
+    void paintScreen(Graphics g) {
         screenDrawer(g);
         GameAlgorithm();
         gridDrawer(g);

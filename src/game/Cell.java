@@ -72,26 +72,23 @@ class Cell {
         }
         g.setColor(randomColor);
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+            g.fillRoundRect(x + 2, y + 2, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3);
         } else if (data.getShape() == SQUARE) {
-            g.fillRect(x + 1, y + 1, 8,8);
+            g.fillRect(x + 2, y + 2, data.getCellSize() - 3,data.getCellSize() - 3);
         }
     }
-
     void DrawCell(int x, int y, Graphics g, Color c) {
         g.setColor(c);
 
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 1, y + 1, 8, 8, 8, 8);
+            g.fillRoundRect(x + 2, y + 2, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3);
         } else if (data.getShape() == SQUARE) {
-            g.fillRect(x + 1, y + 1, 8,8);
+            g.fillRect(x + 2, y + 2, data.getCellSize() - 3,data.getCellSize() - 3);
         }
     }
+
     void DrawCell(int x, int y, Graphics g, ImageIcon img) {
-        g.drawImage(img.getImage(), x, y, null);
+        g.drawImage(img.getImage(), x + 1, y + 1, null);
     }
-
-
-
 
 }

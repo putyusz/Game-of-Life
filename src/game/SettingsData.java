@@ -5,14 +5,11 @@
 
 package game;
 
+import java.awt.*;
 import java.io.*;
 
 class SettingsData implements Serializable {
     private static long serialVersionUID = -1;
-
-    public enum Color {
-        BLUE, CYAN, GREEN, YELLOW, RED
-    }
 
     public enum GameMode {
         NORMAL, DRAW
@@ -29,11 +26,11 @@ class SettingsData implements Serializable {
     private DrawMode drawMode = DrawMode.RAINBOW;
     private Color color = Color.BLUE;
     private GameMode gameMode = GameMode.NORMAL;
-    private int whichWasLast = 1;
-    private int population = 2500;
+    private int population = 25;
     private int delay = 5000;
     private Shape shape = Shape.CIRCLE;
     private boolean crazyRainbow = false;
+    private int cellSize = 10;
 
     private String settingsPath = System.getenv("APPDATA");
     private File settingsFile = new File(settingsPath,"settings").getAbsoluteFile();
@@ -65,14 +62,6 @@ class SettingsData implements Serializable {
 
     void setPopulation(int population) {
         this.population = population;
-    }
-
-    int getWhichWasLast() {
-        return whichWasLast;
-    }
-
-    void setWhichWasLast(int whichWasLast) {
-        this.whichWasLast = whichWasLast;
     }
 
     GameMode getGameMode() {
@@ -107,6 +96,15 @@ class SettingsData implements Serializable {
         this.shape = shape;
     }
 
+    public int getCellSize() {
+        return cellSize;
+    }
+
+    public void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
+    }
+
+
     void writeSettings(SettingsData data) {
         try {
             FileOutputStream f = new FileOutputStream(settingsFile);
@@ -121,18 +119,20 @@ class SettingsData implements Serializable {
     SettingsData readSettings() {
         SettingsData data = new SettingsData();
         try {
-            FileInputStream f = new FileInputStream(settingsFile);
-            ObjectInputStream in = new ObjectInputStream(f);
-            data = (SettingsData) in.readObject();
-            in.close();
+            if(settingsFile.exists()) {
+                FileInputStream f = new FileInputStream(settingsFile);
+                ObjectInputStream in = new ObjectInputStream(f);
+                data = (SettingsData) in.readObject();
+                in.close();
+            }
             setShape(data.getShape());
             setDelay(data.getDelay());
             setCrazyRainbow(data.isCrazyRainbow());
             setPopulation(data.getPopulation());
-            setWhichWasLast(data.getWhichWasLast());
             setGameMode(data.getGameMode());
             setDrawMode(data.getDrawMode());
             setColor(data.getColor());
+            setCellSize(data.getCellSize());
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

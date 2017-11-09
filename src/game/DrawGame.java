@@ -103,14 +103,14 @@ class DrawGame extends NormalGame implements ActionListener {
     }
 
     private void panelMousePressed(MouseEvent e) {
-        x = e.getX() / 10;
-        y = e.getY() / 10;
+        x = e.getX() / data.getCellSize();
+        y = e.getY() / data.getCellSize();
         createCell(x, y);
     }
 
     private void panelMouseDragged(MouseEvent e) {
-        x = e.getX() / 10;
-        y = e.getY() / 10;
+        x = e.getX() / data.getCellSize();
+        y = e.getY() / data.getCellSize();
         createCell(x, y);
     }
 
@@ -120,7 +120,7 @@ class DrawGame extends NormalGame implements ActionListener {
             for ( int i = 0; i < row; i++){
                 for ( int j = 0; j < column; j++){
                     if(table.get(i).get(j).getStatus()){
-                        g.fillRoundRect(j * 10 + 1, i * 10 + 1, 8, 8, 8, 8);
+                        g.fillRoundRect(j * data.getCellSize() + 2, i * data.getCellSize() + 2, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3);
                     }
                 }
             }
