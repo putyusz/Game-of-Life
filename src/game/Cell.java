@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 12/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import javax.swing.*;
@@ -72,18 +67,18 @@ class Cell {
         }
         g.setColor(randomColor);
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 2, y + 2, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3);
+            g.fillRoundRect(x + 1, y + 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1);
         } else if (data.getShape() == SQUARE) {
-            g.fillRect(x + 2, y + 2, data.getCellSize() - 3,data.getCellSize() - 3);
+            g.fillRect(x + 1, y + 1, data.getCellSize() - 1,data.getCellSize() - 1);
         }
     }
     void DrawCell(int x, int y, Graphics g, Color c) {
         g.setColor(c);
 
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 2, y + 2, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3, data.getCellSize() - 3);
+            g.fillRoundRect(x + 1, y + 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1);
         } else if (data.getShape() == SQUARE) {
-            g.fillRect(x + 2, y + 2, data.getCellSize() - 3,data.getCellSize() - 3);
+            g.fillRect(x + 1, y + 1, data.getCellSize() - 1,data.getCellSize() - 1);
         }
     }
 

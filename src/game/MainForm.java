@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 15/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import javax.swing.*;
@@ -11,9 +6,12 @@ import java.net.URL;
 
 import static game.SettingsData.GameMode.*;
 
+/**
+ *MainForm
+ */
 public class MainForm {
     static JFrame mainFrame = new JFrame("Game of Life");
-    static SettingsData data = new SettingsData();
+    static SettingsData data;
     private JPanel mainPanel;
 
     private JButton SETTINGSButton;
@@ -29,10 +27,14 @@ public class MainForm {
     private JMenuItem restartItem = new JMenuItem("Restart");
     private JMenuItem exitItem = new JMenuItem("Exit");
 
+    /**
+     * A főmenüt csinálja meg valamint beolvassa fájlból a beállításokat
+     */
     MainForm() {
-        URL iconURL = MainForm.class.getResource("GameIcon.png" /*"GhostIcon.png"*/);
-        ImageIcon icon = new ImageIcon(iconURL);
+        URL iconURL = MainForm.class.getResource("assets/GameIcon.png" /*"GhostIcon.png"*/);
+        ImageIcon icon = new ImageIcon("assets/GameIcon.png");
 
+        data = new SettingsData();
         data = data.readSettings();
 
         startItem.setEnabled(false);
@@ -68,7 +70,7 @@ public class MainForm {
             mainFrame.getContentPane().repaint();
 
             if (data.getGameMode() == NORMAL) {
-                mainFrame.add(new NormalGame(mainPanel, menuBar, exitItem));
+                mainFrame.add(new NormalGame(mainPanel, menuBar, startItem,restartItem, exitItem));
                 mainFrame.validate();
             } else if (data.getGameMode() == DRAW) {
                 mainFrame.add(new DrawGame(mainPanel, menuBar, startItem, restartItem, exitItem));

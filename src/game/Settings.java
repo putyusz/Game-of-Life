@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 12/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import javax.swing.*;
@@ -61,6 +56,8 @@ public class Settings extends JPanel implements Serializable {
                 break;
             case GHOST:
                 ghostsRadioButton.setSelected(true);
+                cellSizeSlider.setEnabled(false);
+                cellSizeSlider.setValue(15);
                 break;
             case COLORED:
                 coloredDotsRadioButton.setSelected(true);
@@ -90,17 +87,22 @@ public class Settings extends JPanel implements Serializable {
         rainbowDotsRadioButton.addActionListener(e -> {
             data.setDrawMode(RAINBOW);
             data.setCrazyRainbow(false);
+            cellSizeSlider.setEnabled(true);
             colorChooser.setEnabled(false);
         });
 
         crazyRainbowDotsRadioButton.addActionListener(e -> {
             data.setDrawMode(CRAZY_RAINBOW);
             data.setCrazyRainbow(true);
+            cellSizeSlider.setEnabled(true);
             colorChooser.setEnabled(false);
         });
 
         ghostsRadioButton.addActionListener(e -> {
             data.setDrawMode(GHOST);
+            data.setCellSize(15);
+            cellSizeSlider.setEnabled(false);
+            cellSizeSlider.setValue(15);
             data.setCrazyRainbow(false);
             colorChooser.setEnabled(false);
         });
@@ -108,6 +110,7 @@ public class Settings extends JPanel implements Serializable {
         coloredDotsRadioButton.addActionListener(e -> {
             data.setDrawMode(COLORED);
             data.setCrazyRainbow(false);
+            cellSizeSlider.setEnabled(true);
             colorChooser.setEnabled(true);
         });
 

@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 12/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import javax.swing.*;
@@ -17,7 +12,11 @@ import static game.MainForm.data;
 import static game.MainForm.mainFrame;
 import static game.SettingsData.DrawMode.*;
 
+/**
+ * Normal game
+ */
 public class NormalGame extends JPanel implements ActionListener {
+
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
@@ -25,52 +24,70 @@ public class NormalGame extends JPanel implements ActionListener {
 
     ArrayList<ArrayList<Cell>> table;
 
-    private URL ghostURL = NormalGame.class.getResource("Ghost.png");
     private ImageIcon ghost;
 
     Timer timer;
 
-    NormalGame() {
+    /** NormalGame
+     * Konstruktor ami létrehozza az alap táblát és megcsinálja a grafikus felületet
+     * @param mainPanel a főpanel amire rajzol
+     * @param menuBar innen érhetőek el a kilépés, kezdés, újrakezdés, csak játék alatt látszik
+     * @param startItem a játék elindítása
+     * @param restartItem a játék újraindítása újragenerált táblával
+     * @param exitItem kilépés a játékból
+     */
+    NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem) {
         table = new ArrayList<>();
-        ghost = new ImageIcon(ghostURL);
+        URL ghostURL = NormalGame.class.getResource("assets/Ghost.png");
+        ghost = new ImageIcon("assets/Ghost.png");
         row = (height - 20) / data.getCellSize();
         column = width / data.getCellSize();
-    }
-
-    NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem exitItem) {
-        table = new ArrayList<>();
-        ghost = new ImageIcon(ghostURL);
-        row = (height - 20) / data.getCellSize();
-        column = width / data.getCellSize();
+        timer = new Timer(data.getDelay() / 60, this);
 
         setBackground(new Color(69, 69, 69));
         setLayout(null);
 
+        makeTable();
+
+        makeGUIForGame(mainPanel, menuBar, startItem, restartItem, exitItem);
+    }
+
+    /**
+     * A NormalGame felhasználói felületét csinálja meg
+     * paraméterekhez:
+     * @see NormalGame
+     */
+    void makeGUIForGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem) {
         menuBar.setVisible(true);
 
+        startItem.setEnabled(true);
+        restartItem.setEnabled(true);
         exitItem.setEnabled(true);
 
-        timer = new Timer(data.getDelay() / 60, this);
-        timer.start();
+        startItem.addActionListener(e -> timer.start());
 
-        //alap tabla
-        for (int i = 0; i < row; i++) {
-            ArrayList<Cell> Row = new ArrayList<>();
-            for (int j = 0; j < column; j++) {
-                Random rand = new Random();
-                int k = rand.nextInt(100);
-                if (k < data.getPopulation()) {
-                    Row.add(new Cell(true, false));
-                } else {
-                    Row.add(new Cell(false, false));
-                }
-            }
-            table.add(Row);
-        }
+        restartItem.addActionListener(e -> {
+            repaint();
+            timer.stop();
+            table.clear();
+            makeTable();
+            timer.start();
+        });
 
+       addExitItemListener(mainPanel, menuBar, startItem, restartItem, exitItem);
+    }
+
+    /**
+     * Az Exit menüponthoz csinálja meg a listener-t
+     * paraméterekhez:
+     * @see NormalGame
+     */
+    void addExitItemListener(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem){
         exitItem.addActionListener(e -> {
             menuBar.setVisible(false);
 
+            startItem.setEnabled(false);
+            restartItem.setEnabled(false);
             exitItem.setEnabled(false);
 
             mainFrame.getContentPane().removeAll();
@@ -81,11 +98,28 @@ public class NormalGame extends JPanel implements ActionListener {
         });
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        paintScreen(g);
+    /**
+     * Alap tábla véletlenszerűen elhelyezett sejtekkel
+     */
+    void makeTable(){
+        for (int i = 0; i < row; i++) {
+            ArrayList<Cell> tableRow = new ArrayList<>();
+            for (int j = 0; j < column; j++) {
+                Random rand = new Random();
+                int k = rand.nextInt(100);
+                if (k < data.getPopulation()) {
+                    tableRow.add(new Cell(true, false));
+                } else {
+                    tableRow.add(new Cell(false, false));
+                }
+            }
+            table.add(tableRow);
+        }
     }
 
+    /**
+     * A játék fő algoritmusa ami végignéz a táblában minden cellát
+     */
     void GameAlgorithm() {
         //jatek
 
@@ -214,7 +248,12 @@ public class NormalGame extends JPanel implements ActionListener {
         }
     }
 
-    void screenDrawer(Graphics g) {
+
+    /**
+     * Megrajzolja a cellákat a jelenlegi állapot szerint
+     * @param g amire rajzol
+     */
+    void cellDrawer(Graphics g) {
         //iteraciok
         //kirajzolas
 
@@ -237,6 +276,10 @@ public class NormalGame extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Segédfüggvény a kirajzoláshoz a rácshálót csinálja meg
+     * @param g amire rajzol
+     */
     void gridDrawer(Graphics g) {
         int m = 0, n = 0;
         for (int i = 0; i < row; i++) {
@@ -250,12 +293,30 @@ public class NormalGame extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Minden egyes iterációban (timer jelzéseire) meghívja a rajzoló függvényeket és az algoritmust
+     * @param g amire rajzol
+     */
     void paintScreen(Graphics g) {
-        screenDrawer(g);
+        cellDrawer(g);
         GameAlgorithm();
         gridDrawer(g);
     }
 
+    /**
+     * Az ősosztály (JPanel) paintComponent függvényét definiálja felül, a rajzoló függvényeket hívja meg
+     * @param g amire rajzol
+     */
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        paintScreen(g);
+    }
+
+    /**
+     * Minden egyes timer tick-nél újrarajzolja a képernyőt
+     * @param s a timer ActionEvent-je
+     */
     @Override
     public void actionPerformed(ActionEvent s) {
         if (s.getSource() == timer) {

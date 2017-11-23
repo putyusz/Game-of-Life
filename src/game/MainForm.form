@@ -93,7 +93,7 @@
         <properties>
           <background color="-12237499"/>
           <foreground color="-1"/>
-          <icon value="game/Title.png"/>
+          <icon value="Title.png"/>
           <text value=""/>
         </properties>
       </component>

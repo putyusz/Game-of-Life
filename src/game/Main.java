@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 12/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import javax.swing.*;

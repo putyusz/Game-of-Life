@@ -1,8 +1,3 @@
-/*
- * Created by Ponekker Patrik on 29/10/17
- * Copyright (c) 2017.
- */
-
 package game;
 
 import java.awt.*;
@@ -96,11 +91,11 @@ class SettingsData implements Serializable {
         this.shape = shape;
     }
 
-    public int getCellSize() {
+    int getCellSize() {
         return cellSize;
     }
 
-    public void setCellSize(int cellSize) {
+    void setCellSize(int cellSize) {
         this.cellSize = cellSize;
     }
 
