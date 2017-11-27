@@ -2,8 +2,14 @@ package game;
 
 import javax.swing.*;
 
+/**
+ * Main class
+ */
 public class Main {
-
+    /**
+     * Létrehozza a főmenüt és beállítja a Look And Feel-t
+     * @param args parancssori argumentumokat lehet megadni, nem használt
+     */
     public static void main(String[] args) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

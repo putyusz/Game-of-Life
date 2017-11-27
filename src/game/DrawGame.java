@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static game.MainForm.data;
 
+/**
+ * Ebben a játékmódban már van beavatkozása a felhasználónak is, tud létrehozni és megszüntetni sejteket egérkattintás segítségével
+ */
 class DrawGame extends NormalGame implements ActionListener {
     private int x = 0, y = 0;
 

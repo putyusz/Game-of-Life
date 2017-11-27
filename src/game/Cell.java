@@ -8,6 +8,9 @@ import java.awt.Color;
 import static game.MainForm.data;
 import static game.SettingsData.Shape.*;
 
+/**
+ * A sejtet megvalósító osztály
+ */
 class Cell {
     private boolean status, nextStatus;
 
@@ -15,6 +18,11 @@ class Cell {
 
     private Color randomColor;
 
+    /**
+     * Konstruktor
+     * @param status A sejt jelenlegi állapota (él vagy halott)
+     * @param nextStatus A sejt következő állapota ( meg fog halni vagy él tovább)
+     */
     Cell(boolean status, boolean nextStatus) {
         this.status = status;
         this.nextStatus = nextStatus;
@@ -41,22 +49,33 @@ class Cell {
         this.nextStatus = nextStatus;
     }
 
-    void live(Cell c, int count) {
-        if (c.getStatus()) {
+    /**
+     * Függvény ami eldönti egy sejtről, hogy az életben marad-e.
+     * @param cell A sejt amiről el kell dönteni, hogy életben marad-e.
+     * @param count Hány szomszédja van az adott sejtnek
+     */
+    void live(Cell cell, int count) {
+        if (cell.getStatus()) {
             if (count == 2 || count == 3) {
-                c.setNextStatus(true);
+                cell.setNextStatus(true);
             } else {
-                c.setNextStatus(false);
+                cell.setNextStatus(false);
             }
         } else {
             if (count == 3) {
-                c.setNextStatus(true);
+                cell.setNextStatus(true);
             } else {
-                c.setNextStatus(false);
+                cell.setNextStatus(false);
             }
         }
     }
 
+    /**
+     * Sejtet kirajzoló függvény
+     * @param x A sejt x koordinátája
+     * @param y A sejt y koordinátája
+     * @param g Amire rajzol
+     */
     void DrawCell(int x, int y, Graphics g) {
         if (data.isCrazyRainbow()) {
             R = (int) (Math.random() * 256);
@@ -67,21 +86,36 @@ class Cell {
         }
         g.setColor(randomColor);
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 1, y + 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1);
+            g.fillRoundRect(x, y, data.getCellSize(), data.getCellSize(), data.getCellSize(), data.getCellSize());
         } else if (data.getShape() == SQUARE) {
             g.fillRect(x + 1, y + 1, data.getCellSize() - 1,data.getCellSize() - 1);
         }
     }
-    void DrawCell(int x, int y, Graphics g, Color c) {
-        g.setColor(c);
+
+    /**
+     * Sejtet kirajzoló függvény
+     * @param x A sejt x koordinátája
+     * @param y A sejt y koordinátája
+     * @param g Amire rajzol
+     * @param color Ilyen színű lesz a sejt
+     */
+    void DrawCell(int x, int y, Graphics g, Color color) {
+        g.setColor(color);
 
         if (data.getShape() == CIRCLE) {
-            g.fillRoundRect(x + 1, y + 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1, data.getCellSize() - 1);
+            g.fillRoundRect(x, y, data.getCellSize(), data.getCellSize(), data.getCellSize(), data.getCellSize());
         } else if (data.getShape() == SQUARE) {
             g.fillRect(x + 1, y + 1, data.getCellSize() - 1,data.getCellSize() - 1);
         }
     }
 
+    /**
+     * Sejtet kirajzoló függvény
+     * @param x A sejt x koordiánátja
+     * @param y A sejt y koordinátája
+     * @param g Amire Rajzol
+     * @param img Képe a sejtnek
+     */
     void DrawCell(int x, int y, Graphics g, ImageIcon img) {
         g.drawImage(img.getImage(), x + 1, y + 1, null);
     }

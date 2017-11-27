@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,7 +12,7 @@ import static game.MainForm.mainFrame;
 import static game.SettingsData.DrawMode.*;
 
 /**
- * Normal game
+ * A sima játék, ekkor a felhasználónak nincs beavatkozása, csak elindítani és újraindítani tudja a játékot, utóbbi esetben új tábla generálódik
  */
 public class NormalGame extends JPanel implements ActionListener {
 
@@ -38,7 +37,6 @@ public class NormalGame extends JPanel implements ActionListener {
      */
     NormalGame(JPanel mainPanel, JMenuBar menuBar, JMenuItem startItem, JMenuItem restartItem, JMenuItem exitItem) {
         table = new ArrayList<>();
-        URL ghostURL = NormalGame.class.getResource("assets/Ghost.png");
         ghost = new ImageIcon("assets/Ghost.png");
         row = (height - 20) / data.getCellSize();
         column = width / data.getCellSize();

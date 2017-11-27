@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Game_of_Life_jar</output-path>
     <root id="archive" name="Game of Life.jar">
       <element id="module-output" name="Game of Life" />
+      <element id="dir-copy" path="$PROJECT_DIR$/assets" />
     </root>
   </artifact>
 </component>

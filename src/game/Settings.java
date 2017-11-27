@@ -10,6 +10,9 @@ import static game.SettingsData.DrawMode.*;
 import static game.SettingsData.Shape.*;
 import static game.SettingsData.GameMode.*;
 
+/**
+ * A beállítások felhasználói felülete
+ */
 public class Settings extends JPanel implements Serializable {
 
     private JRadioButton ghostsRadioButton;
@@ -37,6 +40,10 @@ public class Settings extends JPanel implements Serializable {
     private JRadioButton squareRadioButton;
     private JColorChooser colorChooser;
 
+    /**
+     * A beállítások felhasználói felületét hozza létre
+     * @param mainPanel A főmenü JPanelje
+     */
     Settings(JPanel mainPanel) {
 
         popSlider.setValue(data.getPopulation());
@@ -151,7 +158,7 @@ public class Settings extends JPanel implements Serializable {
         });
 
         backButton.addActionListener(e -> {
-            data.writeSettings(data);
+            data.writeSettings();
             mainFrame.getContentPane().removeAll();
             mainFrame.getContentPane().repaint();
             mainFrame.add(mainPanel);

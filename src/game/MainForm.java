@@ -2,15 +2,14 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
 
 import static game.SettingsData.GameMode.*;
 
 /**
- *MainForm
+ *A játék főmenüje
  */
 public class MainForm {
-    static JFrame mainFrame = new JFrame("Game of Life");
+    static JFrame mainFrame;
     static SettingsData data;
     private JPanel mainPanel;
 
@@ -21,26 +20,32 @@ public class MainForm {
     JPanel buttonsPanel;
     JLabel pictureLabel;
 
-    private JMenuBar menuBar = new JMenuBar();
+    private JMenuBar menuBar;
 
-    private JMenuItem startItem = new JMenuItem("Start");
-    private JMenuItem restartItem = new JMenuItem("Restart");
-    private JMenuItem exitItem = new JMenuItem("Exit");
+    private JMenuItem startItem;
+    private JMenuItem restartItem;
+    private JMenuItem exitItem;
 
     /**
      * A főmenüt csinálja meg valamint beolvassa fájlból a beállításokat
      */
     MainForm() {
-        URL iconURL = MainForm.class.getResource("assets/GameIcon.png" /*"GhostIcon.png"*/);
+
+        mainFrame = new JFrame("Game of Life");
         ImageIcon icon = new ImageIcon("assets/GameIcon.png");
 
         data = new SettingsData();
-        data = data.readSettings();
+        data.readSettings();
+
+        startItem = new JMenuItem("Start");
+        restartItem = new JMenuItem("Restart");
+        exitItem = new JMenuItem("Exit");
 
         startItem.setEnabled(false);
         restartItem.setEnabled(false);
         exitItem.setEnabled(false);
 
+        menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         menu.setBackground(new Color(49, 49, 49));
         menu.setForeground(new Color(255, 255, 255));
@@ -52,15 +57,17 @@ public class MainForm {
 
         menuBar.setBackground(new Color(49, 49, 49));
         menuBar.setBorder(null);
-        menuBar.setSize(JFrame.MAXIMIZED_HORIZ, 20);
+        menuBar.setSize(JFrame.MAXIMIZED_HORIZ , 20);
         menuBar.add(menu);
 
         menuBar.setVisible(false);
 
+        pictureLabel.setIcon(new ImageIcon("assets/Title.png"));
+
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setIconImage(icon.getImage());
-        mainFrame.add(mainPanel);
         mainFrame.setJMenuBar(menuBar);
+        mainFrame.add(mainPanel);
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mainFrame.setUndecorated(true);
         mainFrame.setVisible(true);
@@ -86,7 +93,10 @@ public class MainForm {
             mainFrame.validate();
         });
 
-        EXITButton.addActionListener(e -> System.exit(0));
+        EXITButton.addActionListener(e -> {
+            mainFrame.dispose();
+            data.writeSettings();
+        });
     }
 
 }

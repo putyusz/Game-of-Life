@@ -3,36 +3,57 @@ package game;
 import java.awt.*;
 import java.io.*;
 
+/**
+ *A beállítások értékeit tárolja és fájlba kiírja
+ */
 class SettingsData implements Serializable {
     private static long serialVersionUID = -1;
 
+    /**
+     *A két játékmódot reprezentálja
+     */
     public enum GameMode {
         NORMAL, DRAW
     }
 
+    /**
+     * A sejtek alakja
+     */
     public enum Shape {
         CIRCLE, SQUARE
     }
 
+    /**
+     * Milyen módon rajzolja ki a sejteket
+     */
     public enum DrawMode {
         RAINBOW, CRAZY_RAINBOW, GHOST, COLORED
     }
 
-    private DrawMode drawMode = DrawMode.RAINBOW;
-    private Color color = Color.BLUE;
-    private GameMode gameMode = GameMode.NORMAL;
-    private int population = 25;
-    private int delay = 5000;
-    private Shape shape = Shape.CIRCLE;
-    private boolean crazyRainbow = false;
-    private int cellSize = 10;
+    private DrawMode drawMode;
+    private Color color;
+    private GameMode gameMode;
+    private int population;
+    private int delay;
+    private Shape shape;
+    private boolean crazyRainbow;
+    private int cellSize;
 
     private String settingsPath = System.getenv("APPDATA");
     private File settingsFile = new File(settingsPath,"settings").getAbsoluteFile();
 
-
+    /**
+     *Az alapértelmezett értékeket állítja be a beállításoknak, ha van fájl amiből beolvas felülíródnak
+     */
     SettingsData() {
-
+        drawMode = DrawMode.COLORED;
+        color = new Color(69,69,69);
+        gameMode = GameMode.NORMAL;
+        population = 25;
+        delay = 5000;
+        shape = Shape.CIRCLE;
+        crazyRainbow = false;
+        cellSize = 10;
     }
 
     boolean isCrazyRainbow() {
@@ -99,19 +120,24 @@ class SettingsData implements Serializable {
         this.cellSize = cellSize;
     }
 
-
-    void writeSettings(SettingsData data) {
+    /**
+     *A beállítások értékeit írja ki fájlba
+     */
+    void writeSettings() {
         try {
             FileOutputStream f = new FileOutputStream(settingsFile);
             ObjectOutputStream out = new ObjectOutputStream(f);
-            out.writeObject(data);
+            out.writeObject(this);
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    SettingsData readSettings() {
+    /**
+     * A beállítások értékeit olvassa be fájlból
+     */
+    void readSettings() {
         SettingsData data = new SettingsData();
         try {
             if(settingsFile.exists()) {
@@ -120,19 +146,18 @@ class SettingsData implements Serializable {
                 data = (SettingsData) in.readObject();
                 in.close();
             }
-            setShape(data.getShape());
-            setDelay(data.getDelay());
-            setCrazyRainbow(data.isCrazyRainbow());
-            setPopulation(data.getPopulation());
-            setGameMode(data.getGameMode());
-            setDrawMode(data.getDrawMode());
-            setColor(data.getColor());
-            setCellSize(data.getCellSize());
+            this.setShape(data.getShape());
+            this.setDelay(data.getDelay());
+            this.setCrazyRainbow(data.isCrazyRainbow());
+            this.setPopulation(data.getPopulation());
+            this.setGameMode(data.getGameMode());
+            this.setDrawMode(data.getDrawMode());
+            this.setColor(data.getColor());
+            this.setCellSize(data.getCellSize());
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return data;
     }
 }
 
